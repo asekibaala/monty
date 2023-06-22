@@ -65,4 +65,12 @@ void rotr(stack_t **stack, unsigned int line_number);
 void queue(stack_t **stack, unsigned int line_number);
 void stack(stack_t **stack, unsigned int line_number);
 
+/* utils.c */
+int is_number(char *str);
+void push_stack(stack_t **stack, int n);
+void free_stack(void);
+void free_instruction(char **instruction);
+void free_all(char **instruction, char *line, FILE *fp);
+void handle_error(char **instruction, char *line, FILE *fp, char *msg);
+
 #endif /* MONTY_H */
