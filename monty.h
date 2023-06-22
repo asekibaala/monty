@@ -73,4 +73,8 @@ void free_instruction(char **instruction);
 void free_all(char **instruction, char *line, FILE *fp);
 void handle_error(char **instruction, char *line, FILE *fp, char *msg);
 
+char **parse_instruction(char *line);
+void execute_instruction(char **instruction);
+void free_instruction(char **instruction);
+
 #endif /* MONTY_H */
