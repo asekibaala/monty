@@ -1,7 +1,9 @@
 #include "monty.h"
+
 /**
  * parse_line - parses through a line and returns the proper instruction
  * @line: the line
+ *
  * Return: a pointer to the proper instruction
  */
 instruction_t *parse_line(char *line)
@@ -13,14 +15,14 @@ instruction_t *parse_line(char *line)
 	instruction = malloc(sizeof(*instruction));
 	if (instruction == NULL)
 	{
-		fprintf(stdin, "Error: malloc failed\n");
+		fprintf(stdout, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
 	instruction->opcode = opcode;
 	instruction->f = NULL;
 
-/* opcode control statments*/
+	/* opcode control statements */
 
 	if (instruction->opcode)
 	{
@@ -38,8 +40,6 @@ instruction_t *parse_line(char *line)
 			instruction->f = add;
 		if (strcmp(instruction->opcode, "nop") == 0)
 			instruction->f = nop;
-
 	}
-
 	return (instruction);
 }
