@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#define STACK 0
-#define QUEUE 1
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -38,8 +36,17 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+typedef enum queue_mode_e {
+    QUEUE,
+    STACK
+} queue_mode_t;
+
+extern stack_t *top;
+extern queue_mode_t current_queue;
+
 extern int mode;
 extern stack_t *stack;
+extern int line_number;
 
 /* main.c */
 void free_stack(void);
@@ -47,8 +54,8 @@ void set_mode(char *mode_str);
 void process_file(char *filename);
 
  /* monty.c */
-void push(stack_t **stack unisigned int line_number);
-void pall(stack_t **stack unisigned int line_number);
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
@@ -63,7 +70,8 @@ void pstr(stack_t **stack, unsigned int line_number);
 void rotl(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
 void queue(stack_t **stack, unsigned int line_number);
-void stack(stack_t **stack, unsigned int line_number);
+void set_stack_mode(stack_t **stack, unsigned int line_number);
+
 
 /* utils.c */
 int is_number(char *str);
@@ -74,7 +82,9 @@ void free_all(char **instruction, char *line, FILE *fp);
 void handle_error(char **instruction, char *line, FILE *fp, char *msg);
 
 char **parse_instruction(char *line);
-void execute_instruction(char **instruction);
+void execute_instruction(char *opcode, stack_t **stack, unsigned int
+			 line_number);
 void free_instruction(char **instruction);
+void set_stack_mode(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */
