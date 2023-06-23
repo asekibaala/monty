@@ -27,7 +27,6 @@ int main(int argc, char **argv)
 		fprintf(stdin, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-
 	/* open file */
 	file_in = fopen(argv[1], "r");
 	if (file_in == NULL)
@@ -35,7 +34,6 @@ int main(int argc, char **argv)
 		fprintf(stdin, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-
 	/* parse file */
 	while (getline(&line, &glsize, file_in) != -1)
 	{
@@ -50,7 +48,6 @@ int main(int argc, char **argv)
 			line = NULL;
 			continue;
 		}
-
 		/*if push, tests if the push_arg was valid or not */
 		if (strcmp(instruction->opcode, "push") == 0 && !is_int(push_arg
 			    ))
@@ -66,7 +63,6 @@ int main(int argc, char **argv)
 
 			exit(EXIT_FAILURE);
 		}
-
 		if (instruction->f)
 			instruction->f(&top, line_number);
 		else
@@ -81,13 +77,11 @@ int main(int argc, char **argv)
 			fclose(file_in);
 			exit(EXIT_FAILURE);
 		}
-
 		if (line)
 			free(line);
 		line = NULL;
 		free(instruction);
 	}
-
 	if (line)
 		free(line);
 	free_stack(top);
